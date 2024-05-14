@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>A-frame starter project</title>
+    <script src="index.js"></script>
+    <script>
+      AFRAME.registerComponent('modify-materials', {
+    init: function(){
+        //wait for model to load
+        this.el.addEventListener('model-loaded', () => {
+            //grab mesh
+            const obj = this.el.getObject3D('mesh');
+            //go over submeshes and modify materials we want
+            obj.traverse(node=> {
+                if(node.name.indexOf('ship') !== -1){
+                    node.material.color.set('red');
+                }
+            })
+        });
+    }
+});
+    </script>
+  </head>
+  <body>
+    <a-scene>
+
+      <a-assets>
+        
+      </a-assets>
+
+      
+      <a-entity gtlf-model="#table" scale = "0.01 0.01 0.01"></a-entity>
+      <a-box depth="1" width="2" height="3"></a-box>
+      <a-plane position="0 0 0" rotation="-90 0 0" width="30" height="30" color="#7CC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+      
+    </a-scene>
+  </body>
+</html>
